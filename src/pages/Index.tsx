@@ -1,13 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import TopBar from "@/components/TopBar";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import CTABanner from "@/components/CTABanner";
+import PlanSection from "@/components/PlanSection";
+import FinancialJourneySection from "@/components/FinancialJourneySection";
+import WaysSection from "@/components/WaysSection";
+import ContactStrip from "@/components/ContactStrip";
+import RetirementWizard from "@/components/RetirementWizard";
 
 const Index = () => {
+  const [showWizard, setShowWizard] = useState(false);
+
+  if (showWizard) {
+    return (
+      <>
+        <TopBar />
+        <Navbar />
+        <RetirementWizard onGoHome={() => setShowWizard(false)} />
+        <CTABanner />
+        <ContactStrip />
+      </>
+    );
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <TopBar />
+      <Navbar />
+      <HeroSection onStartCalculator={() => setShowWizard(true)} />
+      <CTABanner />
+      <PlanSection />
+      <FinancialJourneySection />
+      <CTABanner />
+      <WaysSection />
+      <CTABanner />
+      <ContactStrip />
+    </>
   );
 };
 
