@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
 const LIFESTYLES = [
   { id: "modest", label: "Modest", mult: 18, desc: "Live comfortably with the basics and keep things simple." },
   { id: "comfortable", label: "Comfortable", mult: 25, desc: "Enjoy a balanced lifestyle with room for leisure and comfort." },
@@ -54,7 +54,23 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     const totalProfit = portfolio - totalContributions;
     const durationYears = portfolio > 0 ? Math.floor(portfolio / (inflatedMonthlyExpense * 12)) : 0;
 
-    return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows };
+    // Post-retirement withdrawal simulation
+    const withdrawalRows: { age: number; balance: number; withdrawal: number }[] = [];
+    let postPortfolio = portfolio;
+    let annualWithdrawal = inflatedMonthlyExpense * 12;
+    const postReturnRate = 0.08; // conservative 8% return post-retirement
+    for (let y = 0; y < 40 && postPortfolio > 0; y++) {
+      withdrawalRows.push({
+        age: retireAge + y,
+        balance: Math.round(postPortfolio),
+        withdrawal: Math.round(Math.min(annualWithdrawal, postPortfolio)),
+      });
+      postPortfolio = (postPortfolio - annualWithdrawal) * (1 + postReturnRate);
+      annualWithdrawal *= 1.08; // inflation adjustment
+      if (postPortfolio < 0) postPortfolio = 0;
+    }
+
+    return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows, withdrawalRows };
   }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle]);
 
   const fmt = (n: number) => {
@@ -276,7 +292,37 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
               </ResponsiveContainer>
             </div>
 
-            {/* Table */}
+            {/* Savings & Withdrawal Chart */}
+            <div className="mb-8">
+              <div className="font-display text-lg font-bold text-foreground mb-1">Expected Savings & Portfolio Withdrawal</div>
+              <p className="text-xs text-muted-foreground mb-4">Accumulation phase (saving) vs. decumulation phase (withdrawal in retirement)</p>
+              <ResponsiveContainer width="100%" height={280}>
+                <AreaChart data={[
+                  ...results.rows.filter((_, i) => i % Math.max(1, Math.floor(results.rows.length / 15)) === 0).map(r => ({
+                    age: r.age,
+                    savings: Math.round(r.cumSaved),
+                    portfolio: Math.round(r.portfolio),
+                    phase: "Saving",
+                  })),
+                  ...results.withdrawalRows.filter((_, i) => i % Math.max(1, Math.floor(results.withdrawalRows.length / 15)) === 0).map(r => ({
+                    age: r.age,
+                    withdrawal: r.withdrawal,
+                    portfolio: r.balance,
+                    phase: "Withdrawal",
+                  })),
+                ]}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+                  <XAxis dataKey="age" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                  <YAxis tickFormatter={(v: number) => v >= 1e9 ? `${(v/1e9).toFixed(0)}B` : v >= 1e6 ? `${(v/1e6).toFixed(0)}M` : `${(v/1e3).toFixed(0)}K`} tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} width={50} />
+                  <Tooltip formatter={(value: number) => fmtFull(value)} labelFormatter={(label) => `Age ${label}`} />
+                  <Legend />
+                  <Area type="monotone" dataKey="portfolio" name="Portfolio Balance" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.15} strokeWidth={2} />
+                  <Area type="monotone" dataKey="savings" name="Total Savings" stroke="hsl(var(--green))" fill="hsl(var(--green))" fillOpacity={0.1} strokeWidth={2} />
+                  <Area type="monotone" dataKey="withdrawal" name="Annual Withdrawal" stroke="hsl(var(--gold))" fill="hsl(var(--gold))" fillOpacity={0.15} strokeWidth={2} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
             <div className="overflow-x-auto mb-6">
               <table className="w-full text-xs">
                 <thead>
