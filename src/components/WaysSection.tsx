@@ -12,7 +12,7 @@ const WaysSection = () => (
         {/* Left: stacked images */}
         <div className="space-y-6">
           <div className="rounded-2xl overflow-hidden">
-            <img src={waysWalking} alt="Active retirement lifestyle" className="w-full h-[280px] object-cover" />
+            <img src={waysWalking} alt="Active retirement lifestyle" className="w-full h-[360px] object-cover object-top" />
           </div>
           <div className="rounded-2xl overflow-hidden">
             <img src={waysFamily} alt="Family moments" className="w-full h-[280px] object-cover" />
