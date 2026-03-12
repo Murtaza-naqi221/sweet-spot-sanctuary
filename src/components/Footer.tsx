@@ -1,3 +1,5 @@
+import alMeezanLogo from "@/assets/al-meezan-logo.png";
+
 const footerLinks = {
   "Why Al Meezan": ["Company Overview", "Meet Our Leadership", "Sponsors", "Our Service Partners", "Shariah Compliance", "Careers"],
   "Customer Services": ["Separately Managed Accounts", "Investing with Us", "Value Added Services", "Get in Touch", "Branch Locator", "Complaint & Feedback"],
@@ -31,7 +33,7 @@ const Footer = () => (
         {/* Brand + Complaint */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">AM</div>
+            <img src={alMeezanLogo} alt="Al Meezan Investments" className="w-12 h-12 object-contain" />
             <div>
               <div className="font-display font-bold text-foreground text-lg">Al Meezan</div>
               <div className="text-[10px] text-muted-foreground">Investment Management Ltd.</div>
