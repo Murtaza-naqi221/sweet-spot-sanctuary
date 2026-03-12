@@ -1,5 +1,4 @@
-import waysWalking from "@/assets/ways-walking.jpg";
-import waysFamily from "@/assets/ways-family.jpg";
+import waysStacked from "@/assets/ways-stacked.jpg";
 
 const WaysSection = () => (
   <section className="bg-background py-16">
@@ -9,17 +8,16 @@ const WaysSection = () => (
       </h2>
       <div className="gold-bar mb-10" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left: stacked images */}
-        <div className="space-y-6">
-          <div className="rounded-2xl overflow-hidden">
-            <img src={waysWalking} alt="Active retirement lifestyle" className="w-full h-[360px] object-cover object-top" />
-          </div>
-          <div className="rounded-2xl overflow-hidden">
-            <img src={waysFamily} alt="Family moments" className="w-full h-[280px] object-cover" />
-          </div>
+        {/* Left: single large image */}
+        <div className="rounded-2xl overflow-hidden h-full">
+          <img 
+            src={waysStacked} 
+            alt="Senior man walking with friends in a park" 
+            className="w-full h-full min-h-[600px] object-cover object-center" 
+          />
         </div>
         {/* Right: content cards */}
-        <div className="space-y-6 flex flex-col justify-center">
+        <div className="space-y-6 flex flex-col">
           <WayItem
             icon="✅"
             title="SEE HOW CHOICES AFFECT THE FUTURE"
@@ -43,7 +41,7 @@ const WaysSection = () => (
 const WayItem = ({ icon, title, subtitle, items, cta }: {
   icon: string; title: string; subtitle: string; items: string[]; cta: string;
 }) => (
-  <div className="border border-border rounded-2xl p-6">
+  <div className="border border-border rounded-2xl p-6 flex-1">
     <div className="flex items-center gap-2 mb-3">
       <span className="text-green text-lg">{icon}</span>
       <span className="text-sm font-bold text-green uppercase tracking-wide">{title}</span>
