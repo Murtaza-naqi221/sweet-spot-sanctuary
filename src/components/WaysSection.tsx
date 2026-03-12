@@ -9,15 +9,15 @@ const WaysSection = () => (
       <div className="gold-bar mb-10" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left: single large image */}
-        <div className="rounded-2xl overflow-hidden h-full">
+        <div className="rounded-2xl overflow-hidden">
           <img 
             src={waysStacked} 
             alt="Senior man walking with friends in a park" 
-            className="w-full h-full min-h-[600px] object-cover object-center" 
+            className="w-full h-auto object-cover object-center max-h-[520px]" 
           />
         </div>
         {/* Right: content cards */}
-        <div className="space-y-6 flex flex-col">
+        <div className="space-y-4 flex flex-col">
           <WayItem
             icon="✅"
             title="SEE HOW CHOICES AFFECT THE FUTURE"
