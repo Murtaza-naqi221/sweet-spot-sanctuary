@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
 const LIFESTYLES = [
   { id: "modest", label: "Modest", mult: 18, desc: "Live comfortably with the basics and keep things simple." },
   { id: "comfortable", label: "Comfortable", mult: 25, desc: "Enjoy a balanced lifestyle with room for leisure and comfort." },
