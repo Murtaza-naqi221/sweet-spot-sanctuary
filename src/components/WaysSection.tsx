@@ -17,7 +17,7 @@ const WaysSection = () => (
           />
         </div>
         {/* Right: content cards */}
-        <div className="space-y-6 flex flex-col">
+        <div className="space-y-4 flex flex-col">
           <WayItem
             icon="✅"
             title="SEE HOW CHOICES AFFECT THE FUTURE"
