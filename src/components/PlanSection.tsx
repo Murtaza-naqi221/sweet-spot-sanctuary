@@ -1,3 +1,5 @@
+import ideaFamily from "@/assets/idea-family.png";
+
 interface PlanSectionProps {
   onStartCalculator: () => void;
 }
