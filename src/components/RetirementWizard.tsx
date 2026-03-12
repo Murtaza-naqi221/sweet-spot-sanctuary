@@ -54,7 +54,23 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     const totalProfit = portfolio - totalContributions;
     const durationYears = portfolio > 0 ? Math.floor(portfolio / (inflatedMonthlyExpense * 12)) : 0;
 
-    return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows };
+    // Post-retirement withdrawal simulation
+    const withdrawalRows: { age: number; balance: number; withdrawal: number }[] = [];
+    let postPortfolio = portfolio;
+    let annualWithdrawal = inflatedMonthlyExpense * 12;
+    const postReturnRate = 0.08; // conservative 8% return post-retirement
+    for (let y = 0; y < 40 && postPortfolio > 0; y++) {
+      withdrawalRows.push({
+        age: retireAge + y,
+        balance: Math.round(postPortfolio),
+        withdrawal: Math.round(Math.min(annualWithdrawal, postPortfolio)),
+      });
+      postPortfolio = (postPortfolio - annualWithdrawal) * (1 + postReturnRate);
+      annualWithdrawal *= 1.08; // inflation adjustment
+      if (postPortfolio < 0) postPortfolio = 0;
+    }
+
+    return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows, withdrawalRows };
   }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle]);
 
   const fmt = (n: number) => {
