@@ -292,7 +292,37 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
               </ResponsiveContainer>
             </div>
 
-            {/* Table */}
+            {/* Savings & Withdrawal Chart */}
+            <div className="mb-8">
+              <div className="font-display text-lg font-bold text-foreground mb-1">Expected Savings & Portfolio Withdrawal</div>
+              <p className="text-xs text-muted-foreground mb-4">Accumulation phase (saving) vs. decumulation phase (withdrawal in retirement)</p>
+              <ResponsiveContainer width="100%" height={280}>
+                <AreaChart data={[
+                  ...results.rows.filter((_, i) => i % Math.max(1, Math.floor(results.rows.length / 15)) === 0).map(r => ({
+                    age: r.age,
+                    savings: Math.round(r.cumSaved),
+                    portfolio: Math.round(r.portfolio),
+                    phase: "Saving",
+                  })),
+                  ...results.withdrawalRows.filter((_, i) => i % Math.max(1, Math.floor(results.withdrawalRows.length / 15)) === 0).map(r => ({
+                    age: r.age,
+                    withdrawal: r.withdrawal,
+                    portfolio: r.balance,
+                    phase: "Withdrawal",
+                  })),
+                ]}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+                  <XAxis dataKey="age" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                  <YAxis tickFormatter={(v: number) => v >= 1e9 ? `${(v/1e9).toFixed(0)}B` : v >= 1e6 ? `${(v/1e6).toFixed(0)}M` : `${(v/1e3).toFixed(0)}K`} tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} width={50} />
+                  <Tooltip formatter={(value: number) => fmtFull(value)} labelFormatter={(label) => `Age ${label}`} />
+                  <Legend />
+                  <Area type="monotone" dataKey="portfolio" name="Portfolio Balance" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.15} strokeWidth={2} />
+                  <Area type="monotone" dataKey="savings" name="Total Savings" stroke="hsl(var(--green))" fill="hsl(var(--green))" fillOpacity={0.1} strokeWidth={2} />
+                  <Area type="monotone" dataKey="withdrawal" name="Annual Withdrawal" stroke="hsl(var(--gold))" fill="hsl(var(--gold))" fillOpacity={0.15} strokeWidth={2} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
             <div className="overflow-x-auto mb-6">
               <table className="w-full text-xs">
                 <thead>
