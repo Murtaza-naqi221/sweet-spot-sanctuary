@@ -7,6 +7,7 @@ import PlanSection from "@/components/PlanSection";
 import FinancialJourneySection from "@/components/FinancialJourneySection";
 import WaysSection from "@/components/WaysSection";
 import ContactStrip from "@/components/ContactStrip";
+import Footer from "@/components/Footer";
 import RetirementWizard from "@/components/RetirementWizard";
 
 const Index = () => {
@@ -20,6 +21,7 @@ const Index = () => {
         <RetirementWizard onGoHome={() => setShowWizard(false)} />
         <CTABanner />
         <ContactStrip />
+        <Footer />
       </>
     );
   }
@@ -29,13 +31,13 @@ const Index = () => {
       <TopBar />
       <Navbar />
       <HeroSection onStartCalculator={() => setShowWizard(true)} />
-      <CTABanner />
-      <PlanSection />
+      <PlanSection onStartCalculator={() => setShowWizard(true)} />
       <FinancialJourneySection />
       <CTABanner />
       <WaysSection />
       <CTABanner />
       <ContactStrip />
+      <Footer />
     </>
   );
 };
