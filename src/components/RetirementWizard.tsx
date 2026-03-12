@@ -257,21 +257,23 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
               </div>
             )}
 
-            {/* Portfolio Growth Chart (simplified bar) */}
+            {/* Portfolio Growth Chart */}
             <div className="mb-8">
               <div className="font-display text-lg font-bold text-foreground mb-4">Portfolio Growth</div>
-              <div className="flex items-end gap-1 h-40">
-                {results.rows.filter((_, i) => i % Math.max(1, Math.floor(results.rows.length / 20)) === 0).map((r, i) => {
-                  const maxVal = Math.max(...results.rows.map(r => r.portfolio));
-                  const h = (r.portfolio / maxVal) * 100;
-                  return (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                      <div className="w-full rounded-t bg-primary min-h-[2px]" style={{ height: `${h}%` }} />
-                      <span className="text-[7px] text-muted-foreground">{r.age}</span>
-                    </div>
-                  );
-                })}
-              </div>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={results.rows.filter((_, i) => i % Math.max(1, Math.floor(results.rows.length / 20)) === 0).map(r => ({
+                  age: r.age,
+                  portfolio: Math.round(r.portfolio),
+                  fire: Math.round(r.fire),
+                }))}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+                  <XAxis dataKey="age" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                  <YAxis tickFormatter={(v: number) => v >= 1e9 ? `${(v/1e9).toFixed(0)}B` : v >= 1e6 ? `${(v/1e6).toFixed(0)}M` : `${(v/1e3).toFixed(0)}K`} tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} width={50} />
+                  <Tooltip formatter={(value: number) => fmtFull(value)} labelFormatter={(label) => `Age ${label}`} />
+                  <Bar dataKey="portfolio" name="Portfolio" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="fire" name="FIRE Target" fill="hsl(var(--green))" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
 
             {/* Table */}
