@@ -63,9 +63,9 @@ const PlanSection = ({ onStartCalculator }: PlanSectionProps) => (
           </div>
           <div className="relative min-h-[280px]">
             <img
-              src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop"
-              alt="Financial discussion"
-              className="w-full h-full object-cover"
+              src={ideaFamily}
+              alt="Father and son playing"
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </div>
