@@ -1,8 +1,10 @@
+import alMeezanLogo from "@/assets/al-meezan-logo.png";
+
 const Navbar = () => (
   <nav className="bg-background border-b border-border sticky top-0 z-50 shadow-sm">
     <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">AM</div>
+        <img src={alMeezanLogo} alt="Al Meezan Investments" className="w-10 h-10 object-contain" />
         <div>
           <div className="font-display font-bold text-foreground text-lg leading-tight">Al Meezan</div>
           <div className="text-[10px] text-muted-foreground">Investment Management Ltd.</div>

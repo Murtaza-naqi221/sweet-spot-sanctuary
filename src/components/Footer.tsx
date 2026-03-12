@@ -1,3 +1,5 @@
+import alMeezanLogo from "@/assets/al-meezan-logo.png";
+
 const footerLinks = {
   "Why Al Meezan": ["Company Overview", "Meet Our Leadership", "Sponsors", "Our Service Partners", "Shariah Compliance", "Careers"],
   "Customer Services": ["Separately Managed Accounts", "Investing with Us", "Value Added Services", "Get in Touch", "Branch Locator", "Complaint & Feedback"],
