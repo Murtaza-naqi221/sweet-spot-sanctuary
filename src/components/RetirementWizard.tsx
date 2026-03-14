@@ -41,11 +41,12 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     let portfolio = saved;
     let totalContributions = saved;
     let monthlyContrib = monthly;
+    const selectedCAGR = selectedScheme.cagr;
     const rows: { age: number; annual: number; cumSaved: number; profit: number; portfolio: number; fire: number }[] = [];
 
     for (let y = 0; y < years; y++) {
       const annualContrib = monthlyContrib * 12;
-      portfolio = (portfolio + annualContrib) * (1 + CAGR);
+      portfolio = (portfolio + annualContrib) * (1 + selectedCAGR);
       totalContributions += annualContrib;
       const profit = portfolio - totalContributions;
       const inflatedExpense = expense * Math.pow(1.08, y + 1);
