@@ -226,7 +226,7 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
               <input type="number" value={expense} onChange={e => setExpense(+e.target.value)} min={0}
                 className="w-48 text-2xl font-bold border-2 border-primary rounded-xl py-3 px-4 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
             </div>
-            <NavButtons back={back} next={next} nextLabel="Continue To Lifestyle" />
+            <NavButtons back={back} next={next} nextLabel="Choose Volatility Scheme" />
           </WizCard>
         )}
 
