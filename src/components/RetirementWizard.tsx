@@ -254,6 +254,36 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                   <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
                   <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
                 </div>
+                {/* Composition Table */}
+                {'composition' in selectedScheme && selectedScheme.composition && (
+                  <div className="bg-background rounded-xl border border-border overflow-hidden">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-muted">
+                          <th colSpan={2} className="py-2 px-3 text-center text-foreground font-bold border-b border-border">Fund Composition</th>
+                        </tr>
+                        <tr className="bg-muted">
+                          <th className="py-1.5 px-3 text-left text-muted-foreground font-semibold border-b border-border">Instrument</th>
+                          <th className="py-1.5 px-3 text-right text-muted-foreground font-semibold border-b border-border">Allocation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-border">
+                          <td className="py-2 px-3 text-foreground">Equity</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.equity}%</td>
+                        </tr>
+                        <tr className="border-b border-border">
+                          <td className="py-2 px-3 text-foreground">Debt</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.debt}%</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 px-3 text-foreground">Money Market</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.money}%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
                 {/* Returns Table */}
                 <div className="bg-background rounded-xl border border-border overflow-hidden">
                   <table className="w-full text-xs">
