@@ -237,10 +237,38 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                   <div className="text-xs text-muted-foreground">Pick the lifestyle you want, and we'll help you figure out the savings to get there.</div>
                 </div>
               </div>
-              <div className="bg-primary-light rounded-2xl p-6 border border-primary-border/20">
+              <div className="bg-primary-light rounded-2xl p-6 border border-primary-border/20 flex flex-col">
                 <div className="text-sm text-foreground mb-4 font-medium">{selectedLifestyle.desc}</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground mb-6">
                   You'll need about <strong className="text-foreground">{selectedLifestyle.mult}</strong> times your yearly spending to retire safely
+                </div>
+                {/* Returns Table */}
+                <div className="mt-auto bg-background rounded-xl border border-border overflow-hidden">
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="bg-muted">
+                        <th colSpan={2} className="py-2 px-3 text-center text-foreground font-bold border-b border-border">Returns</th>
+                      </tr>
+                      <tr className="bg-muted">
+                        <th className="py-1.5 px-3 text-left text-muted-foreground font-semibold border-b border-border">Instrument</th>
+                        <th className="py-1.5 px-3 text-right text-muted-foreground font-semibold border-b border-border">CAGR*</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-border">
+                        <td className="py-2 px-3 text-foreground">Equity</td>
+                        <td className="py-2 px-3 text-right text-green font-semibold">17.24%</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="py-2 px-3 text-foreground">Debt</td>
+                        <td className="py-2 px-3 text-right text-green font-semibold">9.87%</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-3 text-foreground">Money Market</td>
+                        <td className="py-2 px-3 text-right text-green font-semibold">9.56%</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
