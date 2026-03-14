@@ -21,6 +21,18 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
   const [increment, setIncrement] = useState(10);
   const [expense, setExpense] = useState(50000);
   const [lifestyle, setLifestyle] = useState("modest");
+  const [volatility, setVolatility] = useState("medium");
+
+  const SCHEMES = [
+    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility" },
+    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility" },
+    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility" },
+    { id: "vas-debt", label: "VAS Debt", cagr: 0.0987, desc: "VAS Debt fund returns" },
+    { id: "vas-equity", label: "VAS Equity", cagr: 0.1724, desc: "VAS Equity fund returns" },
+    { id: "vas-money", label: "VAS Money Market", cagr: 0.0956, desc: "VAS Money Market fund returns" },
+  ];
+
+  const selectedScheme = SCHEMES.find(s => s.id === volatility)!;
 
   const selectedLifestyle = LIFESTYLES.find(l => l.id === lifestyle)!;
 
