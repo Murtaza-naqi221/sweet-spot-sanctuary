@@ -101,7 +101,7 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
 
   const results = step === 9 ? computeResults() : null;
 
-  const stepLabels = ["Primary", "Lifestyle", "Scheme", "Summary"];
+  const stepLabels = ["Primary", "Scheme", "Lifestyle", "Summary"];
   const activeSection = step <= 6 ? 0 : step === 7 ? 1 : step === 8 ? 2 : 3;
 
   return (
