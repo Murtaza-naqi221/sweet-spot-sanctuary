@@ -24,9 +24,9 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
   const [volatility, setVolatility] = useState("medium");
 
   const SCHEMES = [
-    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility" },
-    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility" },
-    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility" },
+    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility", composition: { equity: 80, debt: 20, money: 0 } },
+    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility", composition: { equity: 50, debt: 40, money: 10 } },
+    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility", composition: { equity: 25, debt: 60, money: 15 } },
     { id: "vas-debt", label: "VAS Debt", cagr: 0.0987, desc: "VAS Debt fund returns" },
     { id: "vas-equity", label: "VAS Equity", cagr: 0.1724, desc: "VAS Equity fund returns" },
     { id: "vas-money", label: "VAS Money Market", cagr: 0.0956, desc: "VAS Money Market fund returns" },
@@ -254,6 +254,36 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                   <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
                   <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
                 </div>
+                {/* Composition Table */}
+                {'composition' in selectedScheme && selectedScheme.composition && (
+                  <div className="bg-background rounded-xl border border-border overflow-hidden">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-muted">
+                          <th colSpan={2} className="py-2 px-3 text-center text-foreground font-bold border-b border-border">Fund Composition</th>
+                        </tr>
+                        <tr className="bg-muted">
+                          <th className="py-1.5 px-3 text-left text-muted-foreground font-semibold border-b border-border">Instrument</th>
+                          <th className="py-1.5 px-3 text-right text-muted-foreground font-semibold border-b border-border">Allocation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-border">
+                          <td className="py-2 px-3 text-foreground">Equity</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.equity}%</td>
+                        </tr>
+                        <tr className="border-b border-border">
+                          <td className="py-2 px-3 text-foreground">Debt</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.debt}%</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 px-3 text-foreground">Money Market</td>
+                          <td className="py-2 px-3 text-right text-primary font-semibold">{selectedScheme.composition.money}%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
                 {/* Returns Table */}
                 <div className="bg-background rounded-xl border border-border overflow-hidden">
                   <table className="w-full text-xs">
