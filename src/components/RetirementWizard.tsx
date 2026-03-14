@@ -94,14 +94,14 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
 
   const fmtFull = (n: number) => `PKR ${n.toLocaleString("en-PK", { maximumFractionDigits: 0 })}`;
 
-  const next = () => setStep(s => Math.min(s + 1, 8));
+  const next = () => setStep(s => Math.min(s + 1, 9));
   const back = () => step === 0 ? onGoHome() : setStep(s => Math.max(s - 1, 0));
-  const reset = () => { setStep(0); setAge(24); setRetireAge(50); setSaved(0); setMonthly(20000); setIncrement(10); setExpense(50000); setLifestyle("modest"); };
+  const reset = () => { setStep(0); setAge(24); setRetireAge(50); setSaved(0); setMonthly(20000); setIncrement(10); setExpense(50000); setLifestyle("modest"); setVolatility("medium"); };
 
-  const results = step === 8 ? computeResults() : null;
+  const results = step === 9 ? computeResults() : null;
 
-  const stepLabels = ["Primary", "Lifestyle", "Summary"];
-  const activeSection = step <= 6 ? 0 : step === 7 ? 1 : 2;
+  const stepLabels = ["Primary", "Lifestyle", "Scheme", "Summary"];
+  const activeSection = step <= 6 ? 0 : step === 7 ? 1 : step === 8 ? 2 : 3;
 
   return (
     <div className="min-h-screen bg-gray-section">
