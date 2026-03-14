@@ -285,6 +285,32 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                 </div>
               </div>
             </div>
+            <NavButtons back={back} next={next} nextLabel="Choose Volatility Scheme" />
+          </WizCard>
+        )}
+
+        {/* Step 8: Volatility Scheme */}
+        {step === 8 && (
+          <WizCard>
+            <div className="font-display text-xl font-bold text-foreground mb-6">Choose Volatility Scheme</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {SCHEMES.map(s => (
+                <button key={s.id} onClick={() => setVolatility(s.id)}
+                  className={`w-full text-left px-4 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${
+                    volatility === s.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
+                  }`}>
+                  <div>
+                    <span className="font-semibold text-foreground block">{s.label}</span>
+                    <span className="text-sm text-muted-foreground">{(s.cagr * 100).toFixed(2)}% CAGR</span>
+                  </div>
+                  <span className="text-primary">→</span>
+                </button>
+              ))}
+            </div>
+            <div className="mt-6 bg-primary-light rounded-xl p-4 border border-primary-border/20">
+              <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
+              <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
+            </div>
             <NavButtons back={back} next={next} nextLabel="Continue To Summary" />
           </WizCard>
         )}
