@@ -24,9 +24,9 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
   const [volatility, setVolatility] = useState("medium");
 
   const SCHEMES = [
-    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility" },
-    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility" },
-    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility" },
+    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility", composition: { equity: 80, debt: 20, money: 0 } },
+    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility", composition: { equity: 50, debt: 40, money: 10 } },
+    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility", composition: { equity: 25, debt: 60, money: 15 } },
     { id: "vas-debt", label: "VAS Debt", cagr: 0.0987, desc: "VAS Debt fund returns" },
     { id: "vas-equity", label: "VAS Equity", cagr: 0.1724, desc: "VAS Equity fund returns" },
     { id: "vas-money", label: "VAS Money Market", cagr: 0.0956, desc: "VAS Money Market fund returns" },
