@@ -230,33 +230,32 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
           </WizCard>
         )}
 
-        {/* Step 7: Lifestyle */}
+        {/* Step 7: Volatility Scheme */}
         {step === 7 && (
           <WizCard>
-            <div className="font-display text-xl font-bold text-foreground mb-6">Choose your lifestyle</div>
+            <div className="font-display text-xl font-bold text-foreground mb-6">Choose Volatility Scheme</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                {LIFESTYLES.map(l => (
-                  <button key={l.id} onClick={() => setLifestyle(l.id)}
+                {SCHEMES.map(s => (
+                  <button key={s.id} onClick={() => setVolatility(s.id)}
                     className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all flex items-center justify-between ${
-                      lifestyle === l.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
+                      volatility === s.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
                     }`}>
-                    <span className="font-semibold text-foreground">{l.label}</span>
+                    <div>
+                      <span className="font-semibold text-foreground block">{s.label}</span>
+                      <span className="text-sm text-muted-foreground">{(s.cagr * 100).toFixed(2)}% CAGR</span>
+                    </div>
                     <span className="text-primary">→</span>
                   </button>
                 ))}
-                <div className="bg-gold/10 border border-gold/20 rounded-xl p-4 mt-4">
-                  <div className="text-xs font-bold text-gold-dark mb-1">Tip:</div>
-                  <div className="text-xs text-muted-foreground">Pick the lifestyle you want, and we'll help you figure out the savings to get there.</div>
-                </div>
               </div>
-              <div className="bg-primary-light rounded-2xl p-6 border border-primary-border/20 flex flex-col">
-                <div className="text-sm text-foreground mb-4 font-medium">{selectedLifestyle.desc}</div>
-                <div className="text-sm text-muted-foreground mb-6">
-                  You'll need about <strong className="text-foreground">{selectedLifestyle.mult}</strong> times your yearly spending to retire safely
+              <div className="flex flex-col gap-4">
+                <div className="bg-primary-light rounded-xl p-4 border border-primary-border/20">
+                  <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
+                  <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
                 </div>
                 {/* Returns Table */}
-                <div className="mt-auto bg-background rounded-xl border border-border overflow-hidden">
+                <div className="bg-background rounded-xl border border-border overflow-hidden">
                   <table className="w-full text-xs">
                     <thead>
                       <tr className="bg-muted">
@@ -285,31 +284,36 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                 </div>
               </div>
             </div>
-            <NavButtons back={back} next={next} nextLabel="Choose Volatility Scheme" />
+            <NavButtons back={back} next={next} nextLabel="Choose Lifestyle" />
           </WizCard>
         )}
 
-        {/* Step 8: Volatility Scheme */}
+        {/* Step 8: Lifestyle */}
         {step === 8 && (
           <WizCard>
-            <div className="font-display text-xl font-bold text-foreground mb-6">Choose Volatility Scheme</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {SCHEMES.map(s => (
-                <button key={s.id} onClick={() => setVolatility(s.id)}
-                  className={`w-full text-left px-4 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${
-                    volatility === s.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
-                  }`}>
-                  <div>
-                    <span className="font-semibold text-foreground block">{s.label}</span>
-                    <span className="text-sm text-muted-foreground">{(s.cagr * 100).toFixed(2)}% CAGR</span>
-                  </div>
-                  <span className="text-primary">→</span>
-                </button>
-              ))}
-            </div>
-            <div className="mt-6 bg-primary-light rounded-xl p-4 border border-primary-border/20">
-              <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
-              <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
+            <div className="font-display text-xl font-bold text-foreground mb-6">Choose your lifestyle</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                {LIFESTYLES.map(l => (
+                  <button key={l.id} onClick={() => setLifestyle(l.id)}
+                    className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all flex items-center justify-between ${
+                      lifestyle === l.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
+                    }`}>
+                    <span className="font-semibold text-foreground">{l.label}</span>
+                    <span className="text-primary">→</span>
+                  </button>
+                ))}
+                <div className="bg-gold/10 border border-gold/20 rounded-xl p-4 mt-4">
+                  <div className="text-xs font-bold text-gold-dark mb-1">Tip:</div>
+                  <div className="text-xs text-muted-foreground">Pick the lifestyle you want, and we'll help you figure out the savings to get there.</div>
+                </div>
+              </div>
+              <div className="bg-primary-light rounded-2xl p-6 border border-primary-border/20 flex flex-col">
+                <div className="text-sm text-foreground mb-4 font-medium">{selectedLifestyle.desc}</div>
+                <div className="text-sm text-muted-foreground">
+                  You'll need about <strong className="text-foreground">{selectedLifestyle.mult}</strong> times your yearly spending to retire safely
+                </div>
+              </div>
             </div>
             <NavButtons back={back} next={next} nextLabel="Continue To Summary" />
           </WizCard>
