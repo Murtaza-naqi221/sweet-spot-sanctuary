@@ -84,7 +84,7 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     }
 
     return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows, withdrawalRows };
-  }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle]);
+  }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle, selectedScheme]);
 
   const fmt = (n: number) => {
     if (n >= 1e9) return `₨${(n / 1e9).toFixed(1)}B`;
