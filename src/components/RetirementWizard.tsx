@@ -21,6 +21,18 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
   const [increment, setIncrement] = useState(10);
   const [expense, setExpense] = useState(50000);
   const [lifestyle, setLifestyle] = useState("modest");
+  const [volatility, setVolatility] = useState("medium");
+
+  const SCHEMES = [
+    { id: "high", label: "High", cagr: 0.1577, desc: "Higher returns with higher volatility" },
+    { id: "medium", label: "Medium", cagr: 0.1352, desc: "Balanced returns with moderate volatility" },
+    { id: "low", label: "Low", cagr: 0.1167, desc: "Lower returns with lower volatility" },
+    { id: "vas-debt", label: "VAS Debt", cagr: 0.0987, desc: "VAS Debt fund returns" },
+    { id: "vas-equity", label: "VAS Equity", cagr: 0.1724, desc: "VAS Equity fund returns" },
+    { id: "vas-money", label: "VAS Money Market", cagr: 0.0956, desc: "VAS Money Market fund returns" },
+  ];
+
+  const selectedScheme = SCHEMES.find(s => s.id === volatility)!;
 
   const selectedLifestyle = LIFESTYLES.find(l => l.id === lifestyle)!;
 
@@ -29,11 +41,12 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     let portfolio = saved;
     let totalContributions = saved;
     let monthlyContrib = monthly;
+    const selectedCAGR = selectedScheme.cagr;
     const rows: { age: number; annual: number; cumSaved: number; profit: number; portfolio: number; fire: number }[] = [];
 
     for (let y = 0; y < years; y++) {
       const annualContrib = monthlyContrib * 12;
-      portfolio = (portfolio + annualContrib) * (1 + CAGR);
+      portfolio = (portfolio + annualContrib) * (1 + selectedCAGR);
       totalContributions += annualContrib;
       const profit = portfolio - totalContributions;
       const inflatedExpense = expense * Math.pow(1.08, y + 1);
@@ -71,7 +84,7 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
     }
 
     return { portfolio, fireRequired, inflatedMonthlyExpense, totalContributions, totalProfit, durationYears, rows, withdrawalRows };
-  }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle]);
+  }, [age, retireAge, saved, monthly, increment, expense, selectedLifestyle, selectedScheme]);
 
   const fmt = (n: number) => {
     if (n >= 1e9) return `₨${(n / 1e9).toFixed(1)}B`;
@@ -82,14 +95,14 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
 
   const fmtFull = (n: number) => `PKR ${n.toLocaleString("en-PK", { maximumFractionDigits: 0 })}`;
 
-  const next = () => setStep(s => Math.min(s + 1, 8));
+  const next = () => setStep(s => Math.min(s + 1, 9));
   const back = () => step === 0 ? onGoHome() : setStep(s => Math.max(s - 1, 0));
-  const reset = () => { setStep(0); setAge(24); setRetireAge(50); setSaved(0); setMonthly(20000); setIncrement(10); setExpense(50000); setLifestyle("modest"); };
+  const reset = () => { setStep(0); setAge(24); setRetireAge(50); setSaved(0); setMonthly(20000); setIncrement(10); setExpense(50000); setLifestyle("modest"); setVolatility("medium"); };
 
-  const results = step === 8 ? computeResults() : null;
+  const results = step === 9 ? computeResults() : null;
 
-  const stepLabels = ["Primary", "Lifestyle", "Summary"];
-  const activeSection = step <= 6 ? 0 : step === 7 ? 1 : 2;
+  const stepLabels = ["Primary", "Lifestyle", "Scheme", "Summary"];
+  const activeSection = step <= 6 ? 0 : step === 7 ? 1 : step === 8 ? 2 : 3;
 
   return (
     <div className="min-h-screen bg-gray-section">
@@ -271,6 +284,32 @@ const RetirementWizard = ({ onGoHome }: WizardProps) => {
                   </table>
                 </div>
               </div>
+            </div>
+            <NavButtons back={back} next={next} nextLabel="Choose Volatility Scheme" />
+          </WizCard>
+        )}
+
+        {/* Step 8: Volatility Scheme */}
+        {step === 8 && (
+          <WizCard>
+            <div className="font-display text-xl font-bold text-foreground mb-6">Choose Volatility Scheme</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {SCHEMES.map(s => (
+                <button key={s.id} onClick={() => setVolatility(s.id)}
+                  className={`w-full text-left px-4 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${
+                    volatility === s.id ? "border-primary bg-primary-light" : "border-border hover:border-primary-border"
+                  }`}>
+                  <div>
+                    <span className="font-semibold text-foreground block">{s.label}</span>
+                    <span className="text-sm text-muted-foreground">{(s.cagr * 100).toFixed(2)}% CAGR</span>
+                  </div>
+                  <span className="text-primary">→</span>
+                </button>
+              ))}
+            </div>
+            <div className="mt-6 bg-primary-light rounded-xl p-4 border border-primary-border/20">
+              <div className="text-sm font-medium text-foreground mb-1">{selectedScheme.label}</div>
+              <div className="text-sm text-muted-foreground">{selectedScheme.desc}</div>
             </div>
             <NavButtons back={back} next={next} nextLabel="Continue To Summary" />
           </WizCard>
