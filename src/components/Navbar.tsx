@@ -12,7 +12,7 @@ const Navbar = () => (
       </div>
       <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-foreground">
         {["Why Al Meezan", "First time Investor", "Regular Investor", "Customer Services", "Investor Education"].map(l => (
-          <a key={l} className="hover:text-primary transition-colors cursor-pointer">{l}</a>
+          <a key={l} className="story-link hover:text-primary transition-colors cursor-pointer">{l}</a>
         ))}
       </div>
       <div className="flex items-center gap-3">
