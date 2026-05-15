@@ -16,7 +16,8 @@ const HeroSection = ({ onStartCalculator }: HeroSectionProps) => (
       <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
 
       <div className="relative max-w-7xl mx-auto w-full px-6 lg:px-12 py-20 lg:py-28">
-        <div className="max-w-2xl animate-fade-in-up">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+         <div className="lg:col-span-7 animate-fade-in-up">
           <span className="inline-block text-xs tracking-[0.3em] uppercase font-semibold text-primary-foreground/90 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-full px-4 py-2 mb-6">
             Shariah Compliant Planning
           </span>
@@ -39,6 +40,25 @@ const HeroSection = ({ onStartCalculator }: HeroSectionProps) => (
               Learn More
             </button>
           </div>
+         </div>
+         <div className="lg:col-span-5 hidden lg:block animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+           <div className="glass rounded-3xl p-6 shadow-2xl">
+             <div className="text-xs uppercase tracking-[0.25em] text-primary font-semibold mb-4">Trusted Returns</div>
+             <div className="space-y-3">
+               {[
+                 { label: "Equity", value: "17.24%" },
+                 { label: "Debt", value: "9.87%" },
+                 { label: "Money Market", value: "9.56%" },
+               ].map((s) => (
+                 <div key={s.label} className="flex items-center justify-between border-b border-border/50 last:border-0 pb-2 last:pb-0">
+                   <span className="text-sm text-foreground/80">{s.label}</span>
+                   <span className="font-display font-bold text-2xl heading-accent">{s.value}</span>
+                 </div>
+               ))}
+             </div>
+             <div className="text-[10px] text-muted-foreground mt-3">CAGR* — Indicative Returns</div>
+           </div>
+         </div>
         </div>
       </div>
     </div>
