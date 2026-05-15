@@ -1,10 +1,10 @@
 import Reveal from "@/components/Reveal";
 
 const cards = [
-  { title: "Income", desc: "What You Earn During Your Working Years.", color: "primary" as const },
-  { title: "Spending", desc: "What Your Lifestyle Costs — Today And In The Future.", color: "green" as const },
-  { title: "Investment", desc: "What You Set Aside And Allow To Grow.", color: "primary" as const },
-  { title: "Time", desc: "How Long Your Money Has To Work, And How Long It Needs To Last.", color: "green" as const },
+  { title: "Income", desc: "What You Earn During Your Working Years.", icon: "💼", num: "01" },
+  { title: "Spending", desc: "What Your Lifestyle Costs — Today And In The Future.", icon: "🛒", num: "02" },
+  { title: "Investment", desc: "What You Set Aside And Allow To Grow.", icon: "📈", num: "03" },
+  { title: "Time", desc: "How Long Your Money Has To Work, And How Long It Needs To Last.", icon: "⏳", num: "04" },
 ];
 
 const FinancialJourneySection = () => (
@@ -24,14 +24,14 @@ const FinancialJourneySection = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((c, i) => (
           <Reveal key={i} delay={i * 80}>
-            <div className="premium-card overflow-hidden group h-full">
-              <div className={`py-4 px-6 ${c.color === "primary" ? "bg-primary" : "bg-green"} relative overflow-hidden`}>
-                <span className="text-primary-foreground font-display font-bold text-xl relative z-10">{c.title}</span>
-                <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-primary-foreground/10 group-hover:scale-150 transition-transform duration-500" />
+            <div className="premium-card group h-full p-7 relative overflow-hidden">
+              <div className="absolute top-4 right-5 text-[11px] font-mono text-muted-foreground/60 tracking-wider">{c.num}</div>
+              <div className="w-14 h-14 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-2xl mb-5 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <span className="group-hover:scale-110 transition-transform">{c.icon}</span>
               </div>
-              <div className="p-6">
-                <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-              </div>
+              <h3 className="font-display font-bold text-2xl text-foreground mb-2">{c.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+              <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full bg-gradient-to-r from-primary to-accent transition-all duration-500" />
             </div>
           </Reveal>
         ))}
