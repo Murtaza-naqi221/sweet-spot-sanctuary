@@ -15,13 +15,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 230 25% 15%;
 
-    --primary: 293 61% 31%;
+    --primary: 295 75% 38%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-light: 293 50% 96%;
-    --primary-border: 293 50% 60%;
+    --primary-light: 295 60% 96%;
+    --primary-border: 295 60% 65%;
 
-    --secondary: 152 100% 26%;
+    --secondary: 150 85% 32%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 14% 96%;
@@ -35,13 +35,13 @@
 
     --border: 220 20% 90%;
     --input: 220 20% 90%;
-    --ring: 293 61% 31%;
+    --ring: 295 75% 38%;
 
     --radius: 0.625rem;
 
-    --green: 152 100% 26%;
-    --green-light: 152 60% 95%;
-    --green-dark: 152 100% 20%;
+    --green: 150 85% 32%;
+    --green-light: 150 60% 95%;
+    --green-dark: 150 90% 24%;
 
     --gray-bg: 220 14% 96%;
     --gray-section: 220 14% 97%;
