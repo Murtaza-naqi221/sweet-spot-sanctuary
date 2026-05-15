@@ -6,7 +6,6 @@ import CTABanner from "@/components/CTABanner";
 import PlanSection from "@/components/PlanSection";
 import FinancialJourneySection from "@/components/FinancialJourneySection";
 import WaysSection from "@/components/WaysSection";
-import ShariahComplianceSection from "@/components/ShariahComplianceSection";
 import ContactStrip from "@/components/ContactStrip";
 import Footer from "@/components/Footer";
 import RetirementWizard from "@/components/RetirementWizard";
@@ -36,7 +35,6 @@ const Index = () => {
       <FinancialJourneySection />
       <CTABanner />
       <WaysSection />
-      <ShariahComplianceSection />
       <CTABanner />
       <ContactStrip />
       <Footer />
