@@ -5,14 +5,14 @@ const items = [
 ];
 
 const ContactStrip = () => (
-  <div className="bg-muted">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6 py-8">
+  <div className="bg-background border-y border-border">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 py-12">
       {items.map((c, i) => (
-        <div key={i} className="flex items-start gap-3">
-          <span className="text-2xl">{c.icon}</span>
+        <div key={i} className="flex items-start gap-4 group">
+          <span className="w-12 h-12 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors flex items-center justify-center text-2xl shrink-0">{c.icon}</span>
           <div>
-            <div className="text-sm font-semibold text-foreground">{c.title}</div>
-            <div className="text-xs text-muted-foreground">{c.sub}</div>
+            <div className="text-sm font-semibold text-foreground mb-1">{c.title}</div>
+            <div className="text-xs text-muted-foreground leading-relaxed">{c.sub}</div>
           </div>
         </div>
       ))}
