@@ -26,18 +26,18 @@ const PlanSection = ({ onStartCalculator }: PlanSectionProps) => (
       <div className="flex flex-wrap gap-3 mb-16">
         <button
           onClick={onStartCalculator}
-          className="bg-primary text-primary-foreground px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
+          className="bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
           Retire Right Calculator
-          <span className="bg-primary-foreground/20 w-7 h-7 rounded flex items-center justify-center text-xs">🔢</span>
+          <span className="bg-primary-foreground/20 w-7 h-7 rounded-full flex items-center justify-center text-xs">🔢</span>
         </button>
-        <button className="border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-muted transition-colors">
+        <button className="bg-accent text-accent-foreground px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity">
           Retirement Guide
-          <span className="bg-muted w-7 h-7 rounded flex items-center justify-center text-xs">↓</span>
+          <span className="bg-accent-foreground/20 w-7 h-7 rounded-full flex items-center justify-center text-xs">↓</span>
         </button>
-        <button className="border border-border text-foreground px-6 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-muted transition-colors">
+        <button className="border-2 border-border text-foreground px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:border-primary hover:text-primary transition-colors">
           Retirement Plans
-          <span className="bg-muted w-7 h-7 rounded flex items-center justify-center text-xs">↗</span>
+          <span className="w-7 h-7 rounded-full flex items-center justify-center text-xs">↗</span>
         </button>
       </div>
 
